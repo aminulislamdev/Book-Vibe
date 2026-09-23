@@ -14,9 +14,15 @@ const WishListButton = ({ book }: { book: TBook }) => {
     );
   }
 
-  const { wishList, setWishList } = context;
+  const { wishList, setWishList, readBook } = context;
 
   const handleWishListButton = () => {
+    if (readBook.some((item) => item.bookId === book.bookId)) {
+      return;
+    }
+    if (wishList.some((item) => item.bookId === book.bookId)) {
+      return;
+    }
     setWishList([...wishList, book]);
   };
 
