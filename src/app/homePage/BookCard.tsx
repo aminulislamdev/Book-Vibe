@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { CiStar } from 'react-icons/ci';
 
 import type { TBook } from '@/app/types/BooksCard';
+import Link from 'next/link';
 
 const BookCard = ({ book }: { book: TBook }) => {
   return (
@@ -70,6 +71,12 @@ const BookCard = ({ book }: { book: TBook }) => {
           />
         </div>
       </div>
+      <Link
+        href={`/books/${book.bookId}`}
+        className="mt-5 block w-full rounded-lg bg-green-600 px-4 py-3 text-center text-sm font-semibold text-white transition-all duration-300 hover:bg-green-700 hover:shadow-md"
+      >
+        View Details
+      </Link>
     </div>
   );
 };
