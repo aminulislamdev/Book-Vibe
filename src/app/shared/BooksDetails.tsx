@@ -1,5 +1,7 @@
 import Image from 'next/image';
 import type { TBook } from '@/app/types/BooksCard';
+import ReadButton from '../bookdetails/ReadButton';
+import WishListButton from '../bookdetails/WishListButton';
 
 interface IBookDetails {
   book: TBook;
@@ -100,13 +102,8 @@ const BookDetails = ({ book }: IBookDetails) => {
           </div>
 
           <div className="flex gap-4">
-            <button className="px-8 py-3 bg-white border-2 border-gray-200 rounded-lg text-gray-900 font-bold hover:bg-gray-50 transition-colors">
-              Read
-            </button>
-
-            <button className="px-8 py-3 bg-[#56b3c7] rounded-lg text-white font-bold hover:bg-[#4aa0b3] transition-colors shadow-sm">
-              Wishlist
-            </button>
+            <ReadButton book={book}></ReadButton>
+            <WishListButton book={book}></WishListButton>
           </div>
 
         </div>
