@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useContext } from 'react';
+import { toast } from 'react-toastify';
 
 import { TBook } from '../types/BooksCard';
 import { BookContext } from '../context/BookContext';
@@ -17,13 +18,22 @@ const WishListButton = ({ book }: { book: TBook }) => {
   const { wishList, setWishList, readBook } = context;
 
   const handleWishListButton = () => {
+    // Already in read list
     if (readBook.some((item) => item.bookId === book.bookId)) {
+      toast.warning('Book is already in read list!');
       return;
     }
+
+    // Already in wishlist
     if (wishList.some((item) => item.bookId === book.bookId)) {
+      toast.warning('Book is already in wishlist!');
       return;
     }
+
+    // Add to wishlist
     setWishList([...wishList, book]);
+
+    toast.success('Book added to wishlist!');
   };
 
   return (
