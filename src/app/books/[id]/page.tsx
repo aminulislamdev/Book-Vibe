@@ -1,28 +1,38 @@
+
 import BooksDetails from '@/app/shared/BooksDetails';
 import type { TBook } from '@/app/types/BooksCard';
 
 interface IBookDetailsPage {
   params: Promise<{
-    id: string
-  }>
+    id: string;
+  }>;
 }
 
-const getBooks = async () => {
-   const res = await fetch('http://localhost:3000/data/booksData.json');
-  
-    if (!res.ok) {
-      throw new Error('Failed to fetch books data');
-    }
-  
-    const bookData: TBook[] = await res.json();
-    return bookData
-}
+const getBooks = async (): Promise<TBook[]> => {
+  const res = await fetch(
+    'http://localhost:3000/data/booksData.json'
+  );
 
-const BookDetailsPage = async ({ params }: IBookDetailsPage) => {
+  if (!res.ok) {
+    throw new Error('Failed to fetch books data');
+  }
 
-  const { id } = await params
-  const booksData = await getBooks()
-  const book = booksData.find((book: TBook) => String(book.bookId) === String(id))
+  const bookData: TBook[] = await res.json();
+
+  return bookData;
+};
+
+const BookDetailsPage = async ({
+  params,
+}: IBookDetailsPage) => {
+  const { id } = await params;
+
+  const booksData = await getBooks();
+
+  const book = booksData.find(
+    (book: TBook) => String(book.bookId) === String(id)
+  );
+
   if (!book) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center">
@@ -36,11 +46,8 @@ const BookDetailsPage = async ({ params }: IBookDetailsPage) => {
       </div>
     );
   }
-  return (
-    <div>
-      <BooksDetails book={book} />
-    </div>
-  );
+
+  return <BooksDetails book={book} />;
 };
 
 export default BookDetailsPage;

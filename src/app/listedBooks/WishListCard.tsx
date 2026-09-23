@@ -1,16 +1,18 @@
-import React from 'react';
+'use client';
+
+import Link from 'next/link';
 import type { TBook } from '@/app/types/BooksCard';
 import { MapPin, User, FileText } from 'lucide-react';
 import Image from 'next/image';
+
 interface WishListCardProps {
   book: TBook;
-  onViewDetails?: (id: string | number) => void;
 }
-const WishListCard = ({ book, onViewDetails }: WishListCardProps) => {
+
+const WishListCard = ({ book }: WishListCardProps) => {
   return (
     <div className="w-full container mx-auto p-4">
       <div className="flex flex-col md:flex-row gap-6 p-6 bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-shadow">
-
         {/* Book Image */}
         <div className="shrink-0 flex justify-center items-start">
           <div className="w-32 md:w-40 bg-gray-100 rounded-lg overflow-hidden flex items-center justify-center p-2">
@@ -19,6 +21,7 @@ const WishListCard = ({ book, onViewDetails }: WishListCardProps) => {
               alt={book.bookName}
               width={200}
               height={300}
+              className="w-full h-auto object-cover rounded shadow-sm"
             />
           </div>
         </div>
@@ -26,7 +29,6 @@ const WishListCard = ({ book, onViewDetails }: WishListCardProps) => {
         {/* Content */}
         <div className="flex-1 flex flex-col justify-between">
           <div>
-
             {/* Title & Author */}
             <h2 className="text-2xl font-bold text-gray-900 font-serif mb-2">
               {book.bookName}
@@ -64,7 +66,6 @@ const WishListCard = ({ book, onViewDetails }: WishListCardProps) => {
 
             {/* Publisher & Pages */}
             <div className="flex flex-wrap items-center gap-6 text-gray-600 text-sm mb-6">
-
               <div className="flex items-center gap-2">
                 <User size={16} />
                 <span>
@@ -78,7 +79,6 @@ const WishListCard = ({ book, onViewDetails }: WishListCardProps) => {
                   Page {book.totalPages}
                 </span>
               </div>
-
             </div>
           </div>
 
@@ -87,7 +87,6 @@ const WishListCard = ({ book, onViewDetails }: WishListCardProps) => {
 
           {/* Footer */}
           <div className="flex flex-wrap items-center gap-3">
-
             <span className="px-4 py-1.5 bg-blue-100 text-blue-600 rounded-full text-sm font-medium">
               Category: {book.category}
             </span>
@@ -96,13 +95,12 @@ const WishListCard = ({ book, onViewDetails }: WishListCardProps) => {
               Rating: {book.rating}
             </span>
 
-            <button
-              onClick={() => onViewDetails?.(book.bookId)}
-              className="px-6 py-1.5 bg-green-600 hover:bg-green-700 text-white rounded-full text-sm font-medium transition-colors ml-auto md:ml-0"
+            <Link
+              href={`/books/${book.bookId}`}
+              className="px-6 py-1.5 bg-green-600 hover:bg-green-700 text-white rounded-full text-sm font-medium transition-colors"
             >
               View Details
-            </button>
-
+            </Link>
           </div>
         </div>
       </div>
@@ -111,3 +109,4 @@ const WishListCard = ({ book, onViewDetails }: WishListCardProps) => {
 };
 
 export default WishListCard;
+
