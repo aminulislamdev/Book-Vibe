@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useContext } from 'react';
+import { toast } from 'react-toastify';
 
 import { TBook } from '../types/BooksCard';
 import { BookContext } from '../context/BookContext';
@@ -12,17 +13,34 @@ const ReadButton = ({ book }: { book: TBook }) => {
     throw new Error('ReadButton must be used inside BookContextProvider');
   }
 
-  const { readBook, setReadBook, wishList, setWishList } = context;
+  const {
+    readBook,
+    setReadBook,
+    wishList,
+    setWishList,
+  } = context;
 
   const handleReadButton = () => {
+    // Already in read list
     if (readBook.some((item) => item.bookId === book.bookId)) {
+      toast.warning('Book is already in read list!');
       return;
     }
+
+    // Add to read list
     setReadBook([...readBook, book]);
-    
-    setWishList(
-      wishList.filter((item) => item.bookId !== book.bookId)
-    );
+
+    // Remove from wishlist if exists
+    if (wishList.some((item) => item.bookId === book.bookId)) {
+      setWishList(
+        wishList.filter((item) => item.bookId !== book.bookId)
+      );
+
+      toast.success('Book moved from wishlist to read list!');
+      return;
+    }
+
+    toast.success('Book added to read list!');
   };
 
   return (
