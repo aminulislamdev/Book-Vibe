@@ -46,7 +46,7 @@ const ReadButton = ({ book }: { book: TBook }) => {
   return (
     <div>
       <button
-        className="px-8 py-3 bg-white border-2 border-gray-200 rounded-lg text-gray-900 font-bold hover:bg-gray-50 transition-colors"
+        className="px-8 py-3 bg-white border-2 border-gray-200 rounded-lg text-gray-900 font-bold hover:bg-gray-50 transition-colors cursor-pointer"
         onClick={handleReadButton}
       >
         Read

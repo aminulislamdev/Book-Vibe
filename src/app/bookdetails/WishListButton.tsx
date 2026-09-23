@@ -39,7 +39,7 @@ const WishListButton = ({ book }: { book: TBook }) => {
   return (
     <div>
       <button
-        className="px-8 py-3 bg-[#56b3c7] rounded-lg text-white font-bold hover:bg-[#4aa0b3] transition-colors shadow-sm"
+        className="px-8 py-3 bg-[#56b3c7] rounded-lg text-white font-bold hover:bg-[#4aa0b3] transition-colors shadow-sm cursor-pointer"
         onClick={handleWishListButton}
       >
         Wishlist
