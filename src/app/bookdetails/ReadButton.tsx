@@ -12,10 +12,17 @@ const ReadButton = ({ book }: { book: TBook }) => {
     throw new Error('ReadButton must be used inside BookContextProvider');
   }
 
-  const { readBook, setReadBook } = context;
+  const { readBook, setReadBook, wishList, setWishList } = context;
 
   const handleReadButton = () => {
+    if (readBook.some((item) => item.bookId === book.bookId)) {
+      return;
+    }
     setReadBook([...readBook, book]);
+    
+    setWishList(
+      wishList.filter((item) => item.bookId !== book.bookId)
+    );
   };
 
   return (
