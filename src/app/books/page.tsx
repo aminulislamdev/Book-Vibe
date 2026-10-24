@@ -3,7 +3,7 @@ import type { TBook } from '@/app/types/BooksCard';
 import BookCard from '../homePage/BookCard';
 
 const Books = async () => {
-  const res = await fetch('http://localhost:3000/data/booksData.json');
+  const res = await fetch('../../../public/data/booksData.json');
 
   if (!res.ok) {
     throw new Error('Failed to fetch books data');
