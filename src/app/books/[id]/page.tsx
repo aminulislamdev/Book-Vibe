@@ -1,6 +1,6 @@
-
 import BooksDetails from '@/app/shared/BooksDetails';
 import type { TBook } from '@/app/types/BooksCard';
+import booksData from '../../../../public/data/booksData.json';
 
 interface IBookDetailsPage {
   params: Promise<{
@@ -8,18 +8,8 @@ interface IBookDetailsPage {
   }>;
 }
 
-const getBooks = async (): Promise<TBook[]> => {
-  const res = await fetch(
-    'http://localhost:3000/data/booksData.json'
-  );
-
-  if (!res.ok) {
-    throw new Error('Failed to fetch books data');
-  }
-
-  const bookData: TBook[] = await res.json();
-
-  return bookData;
+const getBooks = (): TBook[] => {
+  return booksData as TBook[];
 };
 
 const BookDetailsPage = async ({
@@ -27,9 +17,9 @@ const BookDetailsPage = async ({
 }: IBookDetailsPage) => {
   const { id } = await params;
 
-  const booksData = await getBooks();
+  const books = getBooks();
 
-  const book = booksData.find(
+  const book = books.find(
     (book: TBook) => String(book.bookId) === String(id)
   );
 
