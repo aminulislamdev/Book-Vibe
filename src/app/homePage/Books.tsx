@@ -1,24 +1,16 @@
 import BookCard from './BookCard';
 import type { TBook } from '@/app/types/BooksCard';
+import bookData from '../../../public/data/booksData.json';
 
-const Books = async () => {
-  const res = await fetch('http://localhost:3000/data/booksData.json');
-
-  if (!res.ok) {
-    throw new Error('Failed to fetch books data');
-  }
-
-  const bookData: TBook[] = await res.json();
+const Books = () => {
+  const books: TBook[] = bookData as TBook[];
 
   return (
     <section className='container mx-auto'>
       <h2 className='text-center font-bold text-[40px] mb-10'> Books </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {bookData.map((book) => (
-          <BookCard
-            key={book.bookId}
-            book={book}
-          />
+        {books.map((book) => (
+          <BookCard key={book.bookId} book={book} />
         ))}
       </div>
     </section>
